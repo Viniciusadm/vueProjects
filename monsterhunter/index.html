@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matador de Monstros</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <div id="app">
+        <div class="players">
+            <div class="outside player">
+                <h1>Jogador</h1>
+                <div class="inside">
+                    <div class="progress" :class="{danger: lifePlayer <= 20}" :style="{width: lifePlayer + '%'}">
+                    </div>
+                </div>
+                <p class="progressStatus">{{ lifePlayer }}%</p>
+            </div>
+        
+            <div class="outside monster">
+                <h1>Monstro</h1>
+                <div class="inside">
+                    <div class="progress" :class="{danger: lifeMonster <= 20}" :style="{width: lifeMonster + '%'}">
+                    </div>
+                </div>
+                <p class="progressStatus">{{ lifeMonster }}%</p>
+            </div>
+        </div>
+        <h1 class="finish">{{ finish }}</h1>
+        <button v-if="!game" @click="playGame" class="btn newGame">Iniciar Novo Jogo</button>
+        <div v-else-if="game" class="buttonsGame">
+            <button @click="attack" class="btn attack">Ataque</button>
+            <button @click="attackSpecial" class="btn attackSpecial">Ataque Especial</button>
+            <button @click="heal" class="btn heal">Curar</button>
+            <button @click="quit" class="btn quit">Sair</button>
+        </div>
+        <div class="log">
+            <ul>
+                <li v-for="log in logs" :class="log.initiator">{{ log.text }}</li>
+            </ul>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
